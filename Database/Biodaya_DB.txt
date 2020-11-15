@@ -1,0 +1,226 @@
+use biodata;
+
+----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| form_no        | int(11)     | YES  |     | NULL    |       |
+| amount         | int(11)     | YES  |     | NULL    |       |
+| bloodGP        | varchar(50) | YES  |     | NULL    |       |
+| center         | varchar(50) | YES  |     | NULL    |       |
+| city           | varchar(50) | YES  |     | NULL    |       |
+| course         | varchar(50) | YES  |     | NULL    |       |
+| DOB            | date        | YES  |     | NULL    |       |
+| fname          | varchar(50) | YES  |     | NULL    |       |
+| gender         | varchar(50) | YES  |     | NULL    |       |
+| hostel         | varchar(50) | YES  |     | NULL    |       |
+| hsc_per        | double      | YES  |     | NULL    |       |
+| marital_status | varchar(50) | YES  |     | NULL    |       |
+| ssc_per        | double      | YES  |     | NULL    |       |
+| state          | varchar(50) | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+
+
+1. Write a query to find the fname and addresses as alias for (city, state) of all the student.(due to 138 records you can use limit 20)
+
+
+->>  select fname,concat(city,' , ',state) as Address from feb_20 limit 20;
+
+
+
+2. Write a query to find the name first_name,course and of all the employees who are not having O positive blood grp
+
+->> select fname,course,bloodGP from feb_20 where bloodGP <> 'o positive';
+
+
+
+
+3. Write a query to find the form number,marital status,fess of studnets those are not having PG-DAC along with their DOB and gender is male.
+
+->>select form_no,fname,marital_status,amount,DOB from feb_20 where course!='PG-DAC' and gender='male';
+
+
+
+
+
+4.Write a query to find the first_name, hsc_per,ssc_per of the students who are in PG-DAC course and having more than or equal to 60% in ssc and hsc. (use limit 20)
+
+
+->>  select fname,hsc_per,ssc_per from feb_20 where course='PG-DAC' and hsc_per>=60 and ssc_per>=60 limit 20;
+
+
+
+
+
+5. Write a query to find the first_name, hsc_per,ssc_per and Avrage of ssc and hsc percentage of the students who are top 5 from PG-DAC course and for being in toppers list we have to calculate average of ssc Percentage and hsc percentage .
+
+->>select fname,hsc_per,ssc_per,(ssc_per+hsc_per)/2 as AVG from feb_20 where course='PG-DAC' order by AVG desc limit 5;
+
+
+
+
+
+6. 
+Write a query to find the first_name,gender,course,center,age of those student those are having age more than 25 
+
+->>>select fname,gender,course,center,floor(datediff(now(),dob)/365) as AGE from feb_20 where floor(datediff(now(),dob)/365) > 25 ;
+
+
+
+-- select fname, gender, course, center, (year(now())-year(DOB)) as age from feb_20 where (year(now())-year(DOB)) > 25;
+
+
+
+
+7. Write a query to get the course and number of student in the course
+
+-->>  select course, count(*) as count from feb_20 group by course;
+
+
+
+
+8. write a query to get male count and female count and total count in each course
+
+-->> select course,count(case when gender='male' then 1 end) as male , count(case when gender='female' then 1 end) as female ,count(gender) as Total from feb_20 group by course ;
+
+
+---select
+  course,
+  count(case when gender='Male' then 1 end) as male_cnt,
+  count(case when gender='Female' then 1 end) as female_cnt,
+  count(*) as total_cnt
+from feb_20
+group by course;
+
+
+
+
+9. find out how many married studnets are presnt in each course with seprate count for male and female in each course 
+for eg
+
+-->> select course,count(case when gender='male' and marital_status='married' then 1 end) as male , count(case when gender='female' and marital_status='married' then 1 end) as female from feb_20 group by course;
+
+
+ select concat(upper(substr(fname,1,1)),lower(substr(fname,2))) from feb_20 limit 2;
+
+
+
+
+
+select course,count(case when gender='Male'  and marital_status='married' then 1 end) as male, count(case when gender='female' and marital_status='married' then 1 end) as female from feb_20  group by course;
+
+
+
+094_Rupali Pangare_KH is inviting you to a scheduled Zoom meeting.
+
+Topic: 094_Rupali Pangare_KH's Personal Meeting Room
+
+Join Zoom Meeting
+https://us04web.zoom.us/j/5975887963?pwd=c2dEWSs3Y1lpK21yR2NQaXhTWHdodz09
+
+Meeting ID: 597 588 7963
+Passcode: 04
+
+select s.students from students s join packages p on s.id=p.id join
+friends f on s.id=f.id join packages pa on f.friend_id=p.friend_id 
+where p.salary < pa.salary order by pa.salary
+
+select c.city from city ,country where city.countrycode=country.code 
+and country.continent=
+
+select  months*salary as total_earnings,count(*) from employee
+group by months*salary order by total_earnings desc limit1;
+
+select round(sum(LAT_N),2) from station;
+
+select round(LONG_w,4) FROM station where LAT_N > 38.7780
+order by LAT_N  
+
+
+
+select distinct city from station where substr(city,1,1) in ('a','e','i','o','u') and substr(city,-1,1) in ()
+
+
+create table em
+(
+  empno char(4) primary key,
+   ename varchar(100) not null,
+    addr varchar(100) default 'ghbh byiiu',
+    ppno char(20) unique,
+    deptno char(3),
+    constraint fk_emp_dept foreign key(deptno)
+    references dep(deptno)
+     );
+insert into em values('1','ddd','ttt','666','1'),('2','ddd','ttt','66','2'),('3','ddd','ttt','6','2');
+create table dep
+(
+  deptno char(3) primary key,
+   deptname varchar(100) not null,
+   depthead varchar(100)
+);
+
+insert into dep values('1','ghh','ytfytb'),('2','vghh','ootfytb'),('3','lllghh','nnootfytb');
+
+CREATE TABLE P (
+    ID int NOT NULL,
+    Age int default 10
+  
+);
+
+CREATE TABLE O (
+    ID int NOT NULL,
+    OrderDate date DEFAULT GETDATE()
+);
+
+CREATE TABLE k (
+    Age int,
+    City varchar(255) DEFAULT 'Sandnes'
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,108 @@
+MySQL
+Exercise 1
+
+1. Write a program that computes the perimeter and the area of a rectangle. Define
+your own values for the length and width. (Assuming that L and W are the length
+and width of the rectangle, Perimeter = 2*(L+W) and Area = L*W.
+---- 
+delimiter  //
+create procedure rectangle(length float(5,2), width float(5,2))
+Begin
+     declare area float(7,2);
+     declare perimeter float(7,2);
+
+     set  area=(length*width);
+     set  perimeter=(2*(length+width));
+     insert into Equation values(area,"Area Of Rectangle");
+     insert into Equation values(perimeter,"Perimeter Of Rectangle");
+End; //
+delimiter ;
+
+2. Write a program that declares an integer variable called num, assigns a value to it,
+and computes and inserts into the tempp table the value of the variable itself, its
+square, and its cube.
+--
+delimiter //
+create procedure sqr_cuber(num float(5,2))
+Begin
+    declare sqr float(7,2);
+    declare cuber float(7,2);
+    set sqr=(num*num);
+    set cuber=(num*num*num);
+    insert into Equation values(sqr,"Square");
+    insert into Equation values(cuber,"Cube");
+End;//
+delimiter ;
+
+3. Convert a temperature in Fahrenheit (F) to its equivalent in Celsius (C) and vice
+versa. The required formulae are:- C= (F-32)*5/9
+F= 9/5*C + 32
+
+delimiter //
+create procedure Fahre_cel(C float(5,2))
+Begin
+   declare F float(7,2);
+   set F=9/5*C+32;
+   set C=(F-32)*5/9;
+   insert into Equation values(F,"Fahrenheit");
+   insert into Equation values(C,"Celsius");
+End;//
+delimiter ;
+
+4. Convert a number of inches into yards, feet, and inches. For example, 124 inches
+equals 3 yards, 1 foot, and 4 inches.
+delimiter //
+create procedure i_f_y(i int(10))
+Begin
+   declare y float(5,2);
+   declare f float(5,2);
+   declare inch float(5,2);
+   set y=floor(i/(3*12));
+   set f=i/12-y*3;
+   set inch=i-y*12*3-f*12;
+    insert into Equation values(y,"Yard");
+    insert into Equation values(f,"Feet");
+    insert into Equation values(inch,"inches");
+End;//
+delimiter ; 
+
+
+5. Write a program that enables a user to input an integer. The program should then
+state whether the integer is evenly divisible by 5.
+---
+delimiter //
+create procedure check_num(num int(10))
+Begin
+   declare numb int(10);
+   set numb=num;
+   if (numb%5)=0 then
+      insert into Equation values(num,"Number is divisible by 5");
+   else
+      insert into Equation values(num,"Number is not divisible by 5");
+   end if;
+End;//
+delimiter ;
+
+6. Your block should read in two real numbers and tell whether the product of the two
+numbers is equal to or greater than 100.
+--
+delimiter  //
+create procedure check_numbe(numb1 float(7,2), numb2 float(7,2))
+Begin
+   declare mult float(7,2);
+   set mult=numb1*numb2;
+   if mult > 200 then
+      insert into Equation values(mult,"Greater than 200");
+   elseif mult < 200 then
+      insert into Equation values(mult,"Less than 200");
+   else
+      insert into Equation values(mult,"Equal to 200");
+   End if ;
+End;//
+delimiter ;
+
+
+
+
+
+

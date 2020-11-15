@@ -1,0 +1,11 @@
+1.Write an MySQL Query to print the name of the distinct order whose odate between 01/01/1960 to 31/12/1990.
+--select distinct * from orders where odate between "1960-01-01" and "1990-12   -31";
+
+2.Write an Mysql Query to find  whose amt is equal or greater than 1000
+--select * from orders where amt>=1000;
+
+3.Write an MySql Query to find name of cname whose name Start with ‘G’ from Customer
+--select * from customers where Cname Like "G%";
+
+4.find all cname  from customer table  containing the word "as
+--select * from customers where cname like "%as%";

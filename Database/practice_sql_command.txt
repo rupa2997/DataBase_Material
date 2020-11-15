@@ -1,0 +1,164 @@
+1.write a query to fetch only odd rows 
+---SELECT * FROM customers WHERE MOD (Cnum,2)<>0;
+
+--.write a query to fetch only even rows 
+---SELECT * FROM customers WHERE MOD (Cnum,2)<=>0;
+
+2.write a query to find current date-time
+--SELECT CURRENT_TIMESTAMP;
+
+
+3.write a query to find first 3 character of sname from order table
+--select substr(Sname,1,3) from salespeople;
+
+4.write a query to find length of sname from salesperson
+----select sname,length(sname) from salespeople;
+
+5.write a query to find details of customers whoes name is not liu and pereira
+---select * from customers where Cname Not in ("liu","pereira");
+
+6.write a query to find the count of rating for 100 in customer table.
+---select rating,count(rating) from customers where rating="100";
+
+7. write a query to fetch full name of employees
+----select concat(Fname," ",Lname) from employee;
+================================================================
+Use College;
+
+1.Create table EmployeeInfo(EmpID varchar(4),EmpFname varchar(15),EmpLname varchar(15),Department varchar(15),Projetc varchar(5),Address varchar(15),DOB date,Gender varchar(5));
+
+Insert into EmployeeInfo values ('1','Sanjay','Mehra','HR', 'P1','Hyderabad(HYD)','1976/12/01', 'M');
+
+Insert into EmployeeInfo values ('2','Ananya','Mishra','Admin','P2','Delhi(DEL)','1968/05/02', 'F');
+
+Insert into EmployeeInfovalues ('3','Rohan','Diwan','Account', 'P3','Mumbai(BOM)','1980/01/01', 'M');
+
+Insert into EmployeeInfovalues ('4','Sonia','Kulkarni','HR', 'P1','Hyderabad(HYD)','1992/05/02', 'F');
+
+Insert into EmployeeInfovalues ('5','Ankit','Kapoor','Admin', 'P2','Delhi(DEL)','1994/07/03', 'M');
+------------------------------------------------------------------------------------------------
+2.create table EmployeePosition(EmpId varchar(4),EmpPosition varchar(10),DateOfJoining date,Salary double(10,2));
+
+Insert into EmployeePositionvalues ('1','Executive','2019/05/01',300000);
+
+Insert into EmployeePositionvalues ('2','Executive','2019/05/02',75000);
+
+Insert into EmployeePositionvalues ('3','Manager','2019/05/01',900000);
+
+Insert into  EmployeePositionvalues ('2','Lead','2019/05/02',85000);
+
+
+1)-----Write a query to fetch the EmpFname from the EmployeeInfo table in upper case and use the ALIAS name as EmpName.
+         ---select upper(EmpFname) as Empname from EmployeeInfo; 
+
+=============================================================================================
+---------------------------------Hackerank-----------------------------
+========================================================================
+1)Given the CITY and COUNTRY tables, query the names of all cities where the CONTINENT is 'Africa'.
+---select city.name from city where city.countrycode in(select country.code  from country where city.countrycode=country.code);
+---SELECT city.NAME FROM CITY  JOIN COUNTRY  ON city.COUNTRYCODE=country.CODE WHERE country.CONTINENT='Africa';
+---SELECT i.NAME FROM CITY AS i JOIN COUNTRY AS o ON i.COUNTRYCODE=o.CODE WHERE o.CONTINENT='Africa';
+
+2)Given the CITY and COUNTRY tables, query the names of all the continents (COUNTRY.Continent) and their respective average city populations (CITY.Population) rounded down to the nearest integer.
+
+Note: CITY.CountryCode and COUNTRY.Code are matching key columns.
+---SELECT country.CONTINENT, FLOOR(AVG(city.POPULATION)) FROM CITY  JOIN COUNTRY  ON city.COUNTRYCODE=country.CODE GROUP BY country.CONTINENT;
+
+3)Query the Name of any student in STUDENTS who scored higher than  Marks. Order your output by the last three characters of each name. If two or more students both have names ending in the same last three characters (i.e.: Bobby, Robby, etc.), secondary sort them by ascending ID.
+
+---select Name from students where Marks > 75 order by right(Name, 3), id;
+--select Name from students where Marks > 75 order by substr(Name, -3,3), id;
+
+4.Query the names of all the Japanese cities in the CITY table. The COUNTRYCODE for Japan is JPN.
+--
+5.Query all attributes of every Japanese city in the CITY table. The COUNTRYCODE for Japan is JPN.
+---select * from city where countrycode="JPN";
+
+6.Query the sum of the populations for all Japanese cities in CITY. The COUNTRYCODE for Japan is JPN.
+---select sum(population) from city where countrycode="jpn";
+
+7.Write a query that prints a list of employee names (i.e.: the name attribute) from the Employee table in alphabetical order.
+--select name from employee order by name;
+
+8.Write a query that prints a list of employee names (i.e.: the name attribute) for employees in Employee having a salary greater than  per month who have been employees for less than  months. Sort your result by ascending employee_id.
+---select name from Employee where salary > 2000 and months < 10 ORDER BY employee_id;
+
+9.Query the difference between the maximum and minimum populations in CITY
+--select max(population)-min(population) from city;
+
+10.Query the total population of all cities in CITY where District is California.
+--select sum(population) from city where district="california";
+
+
+11.Given the table schemas below, write a query to print the company_code, founder name, total number of lead managers, total number of senior managers, total number of managers, and total number of employees. Order your output by ascending company_code.
+
+---SELECT c.company_code, c.founder, 
+       COUNT(DISTINCT l.lead_manager_code), COUNT(DISTINCT s.senior_manager_code),
+       COUNT(DISTINCT m.manager_code), COUNT(DISTINCT e.employee_code)
+FROM Company c, Lead_Manager l, Senior_Manager s, Manager m, Employee e
+WHERE c.company_code = l.company_code AND 
+      l.lead_manager_code = s.lead_manager_code AND
+      s.senior_manager_code = m.senior_manager_code AND
+      m.manager_code = e.manager_code
+GROUP BY c.company_code, c.founder ORDER BY c.company_code;
+
+
+12.Query an alphabetically ordered list of all names in OCCUPATIONS, immediately followed by the first letter of each profession as a parenthetical (i.e.: enclosed in parentheses). For example: AnActorName(A), ADoctorName(D), AProfessorName(P), and ASingerName(S).
+Query the number of ocurrences of each occupation in OCCUPATIONS. Sort the occurrences in ascending order, and output them in the following format:
+
+There are a total of [occupation_count] [occupation]s.
+
+----select concat(Name, '(', substr(Occupation,1,1),')') from occupations order by Name;
+select concat('There are a total of ', count(Occupation), ' ', lower(Occupation), 's.') from occupations group by Occupation order by count(Occupation), Occupation;
+
+===========================================================
+13.Query the two cities in customers with the shortest and longest CITY names, as well as their respective lengths
+ (i.e.: number of characters in the name). If there is more than one smallest or largest city, choose the one
+ that comes first when ordered alphabetically.
+
+---SELECT MIN(city), LENGTH(city)
+FROM Customers
+WHERE LENGTH(city) =
+(SELECT MIN(LENGTH(city))
+FROM Customers)
+UNION
+SELECT MIN(city), LENGTH(city)
+FROM Customers
+WHERE LENGTH(city) =
+(SELECT MAX(LENGTH(city))
+FROM Customers);
+
+14.Write an SQL query to fetch nth max amount from a table.
+
+
+
+
+--- SELECT distinct amt from orders a WHERE 5 = (SELECT count(distinct amt)
+       from orders) order by a.amt desc;
+                                                                           where 2=10 
+
+
+
+
+ALTER TABLE TABLE_NAME
+ADD FOREIGN KEY (COLUMN_NAME) REFERENCES ALredy_exist_primary_key_TABle_name(COLUMN_NAME);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

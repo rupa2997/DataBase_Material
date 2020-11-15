@@ -1,0 +1,109 @@
+
+Q1.------------------------
+ 1. create table Student
+(
+   sid int primary key,
+   sname varchar (50),
+   birthdate date not null default '1994-01-01'
+ );
+ 
+create table Teacher
+   (
+     tid int not null,
+     tname varchar(20),
+     age int(10),
+     sid int,
+     constraint fk_teacher_student foreign key(sid)
+     references Student(sid)
+   );
+ 
+
+2.update employee set FIRST_NAME='Rupali' and 
+     LAST_NAME='Pangare'  where TITLE='Treasurer';
+
+3.alter table product add column product_price int(10) not null 
+    default 999;
+
+Q2.--------------------------------------------------------------------------------------------------
+
+4.select e.FIRST_NAME, e.LAST_NAME from EMPLOYEE e, Department d  where e.DEPT_ID=d.DEPT_ID;
+
+
+5.select *  from employee e, department d where 
+    e.DEPT_ID=d.DEPT_ID and d.NAME='Operations';
+   
+   select e.FIRST_NAME, e.LAST_NAME  from employee e,    department d where   e.DEPT_ID=d.DEPT_ID and      d.NAME='Operations';
+
+6.select * from employee where FIRST_NAME LIKE ('F%') and 
+    FIRST_NAME LIKE('%AN');
+
+7.select d.DEPT_ID, d.Name, count(*) as Employee_count from employee e, department d where 
+    e.DEPT_ID=d.DEPT_ID group by d.DEPT_ID order by e.Employee_count  DESC;
+   
+
+   select d.DEPT_ID, d.Name, count(*) as Employee_count from employee e, department d where 
+    e.DEPT_ID=d.DEPT_ID group by d.DEPT_ID order by d.name DESC;
+
+8.select c.CUST_ID, c.ADDRESS, c.CITY, c.CUST_TYPE_CD, c.FED_ID,    c.POSTAL_CODE, c.STATE  
+   from Customer c, individual i 
+    where 
+      c.CUST_ID=i.CUST_id and i.Birth_Date between '1962-01-01'
+       and '1977-01-01';
+
+Q3.---------------------------------------------------------------------------------------
+
+
+10.
+delimiter //
+create procedure up()
+begin
+    update employee set title="MANAGER"
+    where dept_id=(select d.dept_id from department d where d.name='Operations');
+end; //
+delimiter ;
+
+9.
+Delimiter //
+create procedure employee_details()
+Begin
+    declare x int(10) default 0;
+    declare First_name varchar(20) not null;
+    declare LAST_NAME varchar(20) not null;
+    declare  start_date  date not null;
+    declare end_date date;
+    declare title varchar(20);
+    declare c1 cursor for select * from employee e,
+         department d where e.DEPT_ID=d.DEPT_ID 
+         and d.Name='Operation';
+     Open c1;
+      while x < 10 do
+         fetch c1 into   First_name , LAST_NAME, start_date,end_date ,title;
+          insert into employee values( First_name , LAST_NAME, start_date ,end_date ,title);
+          set x=x+1;
+      end while;
+     close c1;
+End; //
+Delimiter ;
+
+
+
+ create table Student
+(
+   sid int primary key AUTO_INCREMENT,
+   sname varchar (50),
+   birthdate date not null default '1994-01-01'
+ );
+    
+
+
+
+
+
+
+
+
+
+
+
+
+

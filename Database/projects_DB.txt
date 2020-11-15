@@ -1,0 +1,101 @@
+1.    Write a query to find the addresses (location_id, street_address, city, state_province, country_name) of all the departments.
+--select Department_name, concat(locations.location_id,'   ',street_address,'   ',city,'   ',state_province,'   ',country_name) as addresses from departments, locations,countries where departments.location_id=locations.location_id and countries.country_id=locations.country_id  ;
+
+--SELECT concat('location_id', 'street_address, city', 'state_province', 'country_name','department_name') as addresses
+     FROM locations
+    NATURAL JOIN departments
+     NATURAL JOIN countries;
+
+2.Write a query to find the name (first_name, last name), department ID and name of all the employees.
+-- select concat(e.first_name," ",e.last_name) as name,d.department_id,d.department_name  from employees e, departments d where e.department_id=d.department_id;
+
+
+3.Write a query to find the name (first_name, last_name), job, department ID and name of the employees who works in London.
+
+
+
+
+4.Write a query to find the employee id, name (last_name) along with their manager_id and name (last_name).
+
+
+
+5.Write a query to find the name (first_name, last_name) and hire date of the employees who was hired after 'Jones.
+
+
+
+6.Write a query to get the department name and number of employees in the department.
+
+
+
+7.Write a query to find the employee ID, job title, number of days between ending date and starting date for all jobs in department 90.
+
+
+
+8.Write a query to display the department ID and name and first name of manager. 
+
+
+
+9.Write a query to display the department name, manager name, and city.
+
+
+
+10. Write a query to display the job title and average salary of employees.
+
+
+
+SELECT concat('location_id', 'street_address, city', 'state_province', 'country_name','department_name')
+as addresses from departments, locations,countries where departments.location_id=locations.location_id and countries.country_id=locations.country_id ;
+
+
+
+SELECT concat('location_id', 'street_address, city', 'state_province', 'country_name','department_name') as addresses
+     FROM locations
+    NATURAL JOIN departments
+     NATURAL JOIN countries;
+
+
+
+
+select
+  course,
+  count(case when gender='Male' then 1 end) as male,
+  count(case when gender='Female' then 1 end) as female
+from feb_20
+  where marital_status="married"
+group by course;
+select
+      course,
+       count(case when gender='Male' then 1 end) as male,
+       count(case when gender='Female' then 1 end) as female,
+     from feb_20
+    where marital_status="married"
+     group by course;
+
+
+
+
+select    ->       course,    ->        count(case when gender='Male' then 1 end) as male,    ->        count(case when gender='Female' then 1 end) as female,    ->        count(*) as total    ->      from feb_20    ->     where marital_status="married"    ->      group by course;
+
+
+
+----Write a query to find the name (first_name, last_name) of all employees who works in the IT department. 
+
+select concat(First_name," ",Last_name) from employees where department_id= (select Department_id from departments where department_name="IT");
+
+
+
+
+select concat( first_name, '  ',last_name) from employees where manager_id in (select employee_id 
+FROM employees WHERE department_id 
+IN (select department_id from departments WHERE location_id 
+IN (select location_id from locations where country_id='US')));
+
+---Write a query to find the name (first_name, last_name) of the employees who have a manager and worked in a USA based department.
+
+select first_name,last_name from employees 
+where employee_id in
+ (select employee_id from job_history where department_id in
+ (select department_id from departments where location_id in 
+(select location_id from locations where country_id=
+(select country_id from countries 
+where country_name='United States of America'))));

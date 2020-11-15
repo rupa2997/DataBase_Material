@@ -1,0 +1,39 @@
+delimiter //
+create function av()
+returns float
+deterministic
+begin
+    return(select avg(amt) from orders);
+end; //
+delimiter ;
+
+delimiter //
+create procedure avgg()
+begin
+     declare x float(7,2);
+     set x=av();
+
+     insert into tem values(x);
+end; //
+delimiter ;
+
+delimiter //
+create procedure p()
+begin
+    declare o int(4) ;
+
+    declare d date;
+    declare finished int(10) default 0;
+    declare c1 cursor for select onum,odate from orders;
+    declare continue handler for not found set finished=1;
+    open c1;
+     p:loop
+       fetch c1 into o,d;
+        if finished=1 then
+          leave p;
+        end if;
+         insert into t values(o,d);
+      end loop p;
+      close c1;
+end; //
+delimiter ;

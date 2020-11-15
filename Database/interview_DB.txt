@@ -1,0 +1,35 @@
+interview quetions
+
+1--What is Full Join in SQL?
+
+Full Join:
+
+Full join return rows when there are matching rows in any one of the tables. This means it returns all the rows from the left-hand side table and all the rows from the right-hand side table.
+
+2--What is self-join and what is the requirement of self-join?
+
+
+A self-join is often very useful to convert a hierarchical structure to a flat structure. It is used to join a table to itself as like if that is the second table.
+
+3--is the difference between BETWEEN and IN condition operators?
+----
+The BETWEEN operator is used to display rows based on a range of values. The values can be numbers, text, and dates as well. BETWEEN operator gives us the count of all the values occurs between a particular range.
+
+
+---The IN condition operator is used to check for values contained in a specific set of values. IN operator is used when we have more than one value to choose.
+
+4---Basically, there are 3 types of languages in the DBMS as mentioned below:
+
+
+
+--DDL: DDL is Data Definition Language which is used to define the database and schema structure by using some set of SQL Queries like CREATE, ALTER, TRUNCATE, DROP and RENAME.
+--
+DCL: DCL is Data Control Language which is used to control the access of the users inside the database by using some set of SQL Queries like GRANT and REVOKE.
+--
+DML: DML is Data Manipulation Language which is used to do some manipulations in the database like Insertion, Deletion, etc. by using some set of SQL Queries like SELECT, INSERT, DELETE and UPDATE.
+
+
+5---Which statement is used in a select query for partial matching?
+
+---REGEXP and LIKE statements can be used in a SELECT query for partial matching. 
+--REGEXP is used to search records based on the pattern and LIKE is used to search any record by matching any string at the beginning or end or middle of a particular field value.

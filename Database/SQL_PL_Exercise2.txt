@@ -1,0 +1,50 @@
+MySQL    Exercise 2         
+
+1. Select from any table a number and determine whether it is within a given range (for example, between 1 and 10).          
+----
+create table Emp(EmpNO int(4), Ename varchar(15), Sal int(4), DeptNo int (4));
+--insert into Emp values(1,'A',5000,1);
+--insert into Emp values(1,'A',5000,1);
+--insert into Emp values(3,'C',7000,1);
+--insert into Emp values(4,'D',9000,2);
+--insert into Emp values(5,'E',8000,2);
+
+delimiter //
+create procedure check_number()
+begin
+   declare x int(10);
+   set x=9;
+   if x < 10 and x > 1  then
+      insert into Equation values(x,"between range");
+   elseif x < 10 then
+      insert into Equation values(x," not between range");
+   else
+      insert into Equation values(x,"Higher range");
+   end if;
+End;//
+delimiter ;
+
+2. Select from any table three positive integers representing the sides of a triangle, and determine whether they form a valid triangle. Hint: In a triangle, the sum of any two sides must always be greater than the third side.         
+
+
+ 3. Check if a given a year is a leap year. The condition is:- year should be (divisible by 4 and not divisible by 100) or (divisible by 4 and divisible by 400.). The year should be Selected from some table.        
+delimiter  //
+create procedure Check_year(yr int(10))
+Begin
+    declare y int(10);
+    set y=yr;
+    if MOD(y,4)=0 and MOD(y,100)!=0  or MOD(y,400)=0 then
+         insert into Equation values(y,"Leap Year");
+    else
+         insert into Equation values(y,"Not a Leap Year");
+    end if;
+End;//
+delimiter ;
+
+4. Write a program that Selects from any table two character strings.  Your program should then determine if one character string exists inside another character string.     
+
+delimiter //
+create procedure()
+Begin
+   declare year
+End;//
